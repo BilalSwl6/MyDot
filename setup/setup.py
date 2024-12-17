@@ -116,8 +116,6 @@ def setup_zsh():
         zshrc.write('\n# Enable plugins\n')
         zshrc.write('plugins=(git zsh-syntax-highlighting zsh-autosuggestions)\n')
 
-    # Set Zsh as the default shell
-    run_command(f"chsh -s $(which zsh)", "Setting Zsh as default shell")
 
 # Add aliases to .zshrc for Termux or Linux
 def add_aliases():
