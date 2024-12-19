@@ -23,11 +23,15 @@ run_command() {
     fi
 }
 
-# Confirm before proceeding
+# Confirm before proceeding (with default 'y')
 confirm_step() {
     local message="$1"
     while true; do
-        read -p "$message (y/n): " choice
+        read -p "$message (y/n, default is y): " choice
+        # Set default to 'y' if no input is given
+        if [ -z "$choice" ]; then
+            choice="y"
+        fi
         case "$choice" in
             y|Y) return 0 ;;
             n|N) return 1 ;;
