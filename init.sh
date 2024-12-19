@@ -1,42 +1,42 @@
 #!/bin/bash
 
-# Function to check and install Python
-install_python() {
-    echo "Checking for Python installation..."
-    if command -v python3 &>/dev/null; then
-        echo "Python is already installed."
-    else
-        echo "Python is not installed. Installing Python..."
-        if [ -d "/data/data/com.termux" ]; then
-            pkg update -y && pkg install python -y
-        else
-            sudo apt update -y && sudo apt install python3 -y
-        fi
-        echo "Python installation complete."
-    fi
-}
+# Define colors
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
 
-# Main script logic
-echo "Do you want to run the Python setup script (setup.py)? (yes/no)"
-read -r choice
+echo -e "${CYAN}Running Setup${NC}"
 
-if [[ "$choice" == "yes" ]]; then
-    install_python
-    echo "Running Python script setup.py..."
-    python3 setup/setup.py
-    if [[ $? -ne 0 ]]; then
-        echo "Error: Python script failed to execute."
-        exit 1
-    fi
-else
-    echo "Running alternative Bash script (setup.sh)..."
-    if [ -f ".setup/setup.sh" ]; then
-        chmod +x setup/setup.sh
-        ./setup/setup.sh
-    else
-        echo "Error: setup.sh not found!"
-        exit 1
-    fi
-fi
+# Set execute permissions
+echo -e "${YELLOW}Setting execute permissions for setup scripts...${NC}"
+chmod +x setup/setup.sh
+chmod +x setup/setup.py
 
-echo "Script execution complete."
+# Run the shell script
+echo -e "${GREEN}Executing setup.sh...${NC}"
+./setup/setup.sh
+
+# Ask to run the Python script
+while true; do
+    echo -e "${BLUE}Do you want to run the Python script (setup.py)? (y/n):${NC}"
+    read -p "> " choice
+    case "$choice" in
+        y|Y) 
+            echo -e "${GREEN}Executing setup.py...${NC}"
+            ./setup/setup.py
+            break
+            ;;
+        n|N) 
+            echo -e "${RED}Skipping setup.py execution.${NC}"
+            break
+            ;;
+        *) 
+            echo -e "${RED}Invalid input. Please enter 'y' or 'n'.${NC}"
+            ;;
+    esac
+done
+
+echo -e "${CYAN}Setup Complete!${NC}"
