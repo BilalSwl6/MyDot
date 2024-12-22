@@ -10,14 +10,13 @@ chmod +x *
 
 
 # Run All Scripts
-./ohmyzsh.sh
-./packages.sh
-./ohmyzsh.sh
-./nvim.sh
+.~/MyDot/setup/linux/packages.sh
+.~/MyDot/setup/linux/ohmyzsh.sh
+.~/MyDot/setup/linux/nvim.sh
 
 # Python Scripts
-python zsh-setup.py
-python nvim-set.py
+python ~/MyDot/setup/linux/nvim-set.py
+python ~/MyDot/setup/linux/zsh-setup.py
 
 
 # Git Values
