@@ -14,7 +14,7 @@ echo -e "${CYAN}Running Setup${NC}"
 echo -e "${YELLOW}Setting execute permissions for setup scripts...${NC}"
 chmod +x setup/setup.sh
 chmod +x setup/setup.py
-
+chmod +x setup/nvim.sh
 # Run the shell script
 echo -e "${GREEN}Executing setup.sh...${NC}"
 ./setup/setup.sh
@@ -40,3 +40,9 @@ while true; do
 done
 
 echo -e "${CYAN}Setup Complete!${NC}"
+
+echo -e "${YELLOW}Setting up Neovim...${NC}"
+./setup/nvim.sh
+
+
+
