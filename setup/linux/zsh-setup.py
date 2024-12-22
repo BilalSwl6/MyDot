@@ -22,11 +22,29 @@ def edit_zshrc():
         if line.startswith("plugins=("):
             lines[i] = 'plugins=(git zsh-syntax-highlighting zsh-autosuggestions you-should-use)\n'
 
+    # Add aliases at the end of the file
+    aliases = [
+        'alias del="rm -rf"\n',
+        'alias n="nvim"\n',
+        'alias l="ls -a"\n',
+        'alias q="quit"\n',
+        'alias c="clear"\n',
+        'alias p="python"\n',
+        'alias update="apt update"\n',
+        'alias upgrade="apt upgrade"\n',
+        'alias install="apt install"\n',
+        'alias nc="cd ~/.config/nvim/"\n',
+        'alias zc="n ~/.zshrc"\n',
+        'alias pa="source venv/bin/activate"\n',
+        'alias run="python manage.py runserver"\n'
+    ]
+    lines.extend(aliases)
+
     # Write the updated content back to .zshrc
     with open(zshrc_path, "w") as file:
         file.writelines(lines)
 
-    print(f"Updated {zshrc_path} with new ZSH_THEME and plugins.")
+    print(f"Updated {zshrc_path} with new ZSH_THEME, plugins, and aliases.")
 
 # Main function
 def main():
