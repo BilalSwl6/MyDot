@@ -32,8 +32,8 @@ main() {
     elif is_linux; then
         echo "Running commands for Linux..."
         sudo apt update
-	sudo apt upgrade
-	sudo apt install curl wget git python3 python3-pip
+	sudo apt upgrade -y
+	sudo apt install curl wget git python3 python3-pip -y
 	chmod +x setup/linux/init.sh
 	./setup/linux/init.sh
     else

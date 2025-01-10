@@ -1,18 +1,18 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt upgrade
-sudo apt install curl wget git python3 python3-pip fzf zsh tmux golang cmake 
 
 # Permissions For All Files
 chmod +x *
+echo "Permissions Granted."
 
 # Run All Scripts
+echo "Running all scripts..."
 . ~/MyDot/setup/linux/packages.sh
 . ~/MyDot/setup/linux/ohmyzsh.sh
 . ~/MyDot/setup/linux/nvim.sh
 
 # Python Scripts
+echo "Running Python scripts..."
 python3 ~/MyDot/setup/linux/nvim-set.py
 python3 ~/MyDot/setup/linux/zsh-setup.py
 
