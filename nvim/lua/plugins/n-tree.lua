@@ -7,6 +7,10 @@ return {
   },
   config = function()
     require("nvim-tree").setup {
+	git = {
+		enable = true,
+		timeout = 1000,
+	},
       actions = {
         open_file = {
           quit_on_open = true, -- Automatically close nvim-tree when opening a file
