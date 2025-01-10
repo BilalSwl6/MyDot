@@ -4,20 +4,17 @@ sudo apt update
 sudo apt upgrade
 sudo apt install curl wget git python3 python3-pip fzf zsh tmux golang cmake 
 
-
 # Permissions For All Files
 chmod +x *
 
-
 # Run All Scripts
-.~/MyDot/setup/linux/packages.sh
-.~/MyDot/setup/linux/ohmyzsh.sh
-.~/MyDot/setup/linux/nvim.sh
+. ~/MyDot/setup/linux/packages.sh
+. ~/MyDot/setup/linux/ohmyzsh.sh
+. ~/MyDot/setup/linux/nvim.sh
 
 # Python Scripts
-python ~/MyDot/setup/linux/nvim-set.py
-python ~/MyDot/setup/linux/zsh-setup.py
-
+python3 ~/MyDot/setup/linux/nvim-set.py
+python3 ~/MyDot/setup/linux/zsh-setup.py
 
 # Git Values
 check_git_config() {
@@ -44,4 +41,3 @@ check_git_config() {
 }
 
 check_git_config
-
