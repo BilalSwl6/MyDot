@@ -20,6 +20,14 @@ check_tar() {
     fi
 }
 
+# Function to check if jq is installed
+check_jq() {
+    if ! command -v jq &> /dev/null; then
+        echo "jq is not installed. Installing jq..."
+        sudo apt update && sudo apt install jq -y
+    fi
+}
+
 # Function to download and install Neovim
 install_neovim() {
     echo "Fetching the latest release of Neovim..."
@@ -45,13 +53,13 @@ install_neovim() {
 
     echo "Installing Neovim..."
 
-    # Move the extracted files to /usr/local/bin
-    sudo mv nvim-linux64 /usr/local/bin/nvim
+    # Move the extracted files to the install directory
+    sudo mv nvim-linux64/bin/nvim $INSTALL_DIR
 
     echo "Cleaning up..."
 
-    # Remove the downloaded tarball
-    rm -rf nvim.tar.gz
+    # Remove the downloaded tarball and extracted directory
+    rm -rf nvim.tar.gz nvim-linux64
 
     echo "Neovim installation complete."
 }
@@ -60,6 +68,7 @@ install_neovim() {
 main() {
     check_curl
     check_tar
+    check_jq
     install_neovim
 }
 
