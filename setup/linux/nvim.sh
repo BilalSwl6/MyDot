@@ -1,76 +1,50 @@
 #!/bin/bash
 
-# Set variables
-NVIM_VERSION_URL="https://api.github.com/repos/neovim/neovim/releases/latest"
-INSTALL_DIR="/usr/local/bin"
+# Variables
+NEOVIM_URL="https://github.com/neovim/neovim/releases/download/v0.10.3/nvim-linux64.tar.gz"
+INSTALL_DIR="$HOME/.local"
+NVIM_DIR="$INSTALL_DIR/nvim-linux64"
+PROFILE_FILE="$HOME/.zshrc"
 
-# Function to check if curl is installed
-check_curl() {
-    if ! command -v curl &> /dev/null; then
-        echo "curl is not installed. Installing curl..."
-        sudo apt update && sudo apt install curl -y
-    fi
+# Functions
+function add_to_path() {
+  if ! grep -q "$NVIM_DIR/bin" "$PROFILE_FILE"; then
+    echo "Adding Neovim to PATH in $PROFILE_FILE..."
+    echo "export PATH=\"$NVIM_DIR/bin:\$PATH\"" >> "$PROFILE_FILE"
+    source "$PROFILE_FILE"
+  fi
 }
 
-# Function to check if tar is installed
-check_tar() {
-    if ! command -v tar &> /dev/null; then
-        echo "tar is not installed. Installing tar..."
-        sudo apt update && sudo apt install tar -y
-    fi
+# Step 1: Download Neovim
+echo "Downloading Neovim from $NEOVIM_URL..."
+curl -L "$NEOVIM_URL" -o nvim-linux64.tar.gz || {
+  echo "Error downloading Neovim!"
+  exit 1
 }
 
-# Function to check if jq is installed
-check_jq() {
-    if ! command -v jq &> /dev/null; then
-        echo "jq is not installed. Installing jq..."
-        sudo apt update && sudo apt install jq -y
-    fi
+# Step 2: Extract the tarball
+echo "Extracting Neovim..."
+mkdir -p "$INSTALL_DIR"
+tar -xzf nvim-linux64.tar.gz -C "$INSTALL_DIR" || {
+  echo "Error extracting Neovim!"
+  exit 1
 }
 
-# Function to download and install Neovim
-install_neovim() {
-    echo "Fetching the latest release of Neovim..."
+# Step 3: Add Neovim to PATH
+add_to_path
 
-    # Get the latest release information
-    release_data=$(curl -s $NVIM_VERSION_URL)
-    download_url=$(echo $release_data | jq -r '.assets[] | select(.name | test("linux64.tar.gz")) | .browser_download_url')
+# Step 4: Verify Installation
+echo "Verifying Neovim installation..."
+if command -v nvim &>/dev/null; then
+  echo "Neovim installed successfully!"
+  nvim --version
+else
+  echo "Neovim installation failed!"
+  exit 1
+fi
 
-    if [ -z "$download_url" ]; then
-        echo "Could not find a suitable release for Linux. Exiting."
-        exit 1
-    fi
+# Step 5: Clean up
+echo "Cleaning up..."
+rm -f nvim-linux64.tar.gz
 
-    echo "Downloading Neovim from $download_url..."
-
-    # Download the tarball
-    curl -L -o nvim.tar.gz "$download_url"
-
-    echo "Extracting Neovim..."
-
-    # Extract the tarball
-    tar -xvzf nvim.tar.gz
-
-    echo "Installing Neovim..."
-
-    # Move the extracted files to the install directory
-    sudo mv nvim-linux64/bin/nvim $INSTALL_DIR
-
-    echo "Cleaning up..."
-
-    # Remove the downloaded tarball and extracted directory
-    rm -rf nvim.tar.gz nvim-linux64
-
-    echo "Neovim installation complete."
-}
-
-# Main function
-main() {
-    check_curl
-    check_tar
-    check_jq
-    install_neovim
-}
-
-# Run the main function
-main
+echo "Installation complete! Restart your shell or source your profile file to use Neovim."
