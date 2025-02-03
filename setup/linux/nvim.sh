@@ -15,6 +15,13 @@ function add_to_path() {
   fi
 }
 
+# Check if Neovim is already installed
+if command -v nvim &>/dev/null; then
+  echo "Neovim is already installed at $(command -v nvim)"
+  nvim --version
+  exit 0
+fi
+
 # Step 1: Download Neovim
 echo "Downloading Neovim from $NEOVIM_URL..."
 curl -L "$NEOVIM_URL" -o nvim-linux64.tar.gz || {
