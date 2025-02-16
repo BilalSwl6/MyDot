@@ -1,17 +1,16 @@
 return {
-	"akinsho/horizon.nvim",
-	lazy = false,
-	version = "*",
-	priority = 1000,
-	opts = {
-		overrides = {
-			colors = {
-				CursorLine = { bg = '#1e1e1e', fg = '#ffffff', underline = true }
-			}
-		},
-		config = function()
-			vim.cmd("colorscheme horizon")
-			vim.g.horizon_style = "dark"
-		end,
-	}
+  {
+    "Mofiqul/vscode.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      local vscode = require('vscode')
+      vscode.setup({
+        style = 'dark', -- Default style
+        transparent = false, -- Set true if you want transparency
+        italic_comments = true,
+      })
+      vim.cmd("colorscheme vscode") -- Apply theme
+    end
+  }
 }

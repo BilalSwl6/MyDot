@@ -26,3 +26,19 @@ vim.api.nvim_set_keymap('n', '<leader>t1', ':ToggleTerm1<CR>', { noremap = true,
 vim.api.nvim_set_keymap('n', '<leader>t2', ':ToggleTerm2<CR>', { noremap = true, silent = true, desc = "Toggle Terminal 2" })
 vim.api.nvim_set_keymap('n', '<leader>t3', ':ToggleTerm3<CR>', { noremap = true, silent = true, desc = "Toggle Terminal 3" })
 vim.api.nvim_set_keymap('n', '<leader>t4', ':ToggleTerm4<CR>', { noremap = true, silent = true, desc = "Toggle Terminal 4" })
+
+-- add keymapping for theme switching
+function ToggleVSCodeTheme()
+  local vscode = require('vscode')
+  if vim.o.background == "dark" then
+    vscode.setup({ style = 'light' })
+    vim.o.background = "light"
+  else
+    vscode.setup({ style = 'dark' })
+    vim.o.background = "dark"
+  end
+  vim.cmd("colorscheme vscode") -- Apply theme
+end
+
+vim.keymap.set("n", "<leader>tt", ToggleVSCodeTheme, { desc = "Toggle VS Code Theme" })
+
