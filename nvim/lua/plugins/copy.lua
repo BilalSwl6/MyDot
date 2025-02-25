@@ -21,6 +21,33 @@ return {
             end
         })
 
+        -- Function to handle paste (overrides default p behavior)
+        local function smart_paste()
+            local osc52_paste = require('osc52').paste()
+            if osc52_paste and osc52_paste ~= "" then
+                -- Use OSC52 paste content if available
+                vim.api.nvim_put({osc52_paste}, 'c', true, true)
+                vim.notify("Pasted from OSC52 clipboard", vim.log.levels.INFO)
+            else
+                -- Fall back to regular paste if OSC52 clipboard is empty
+                local keys = vim.api.nvim_replace_termcodes('p', true, false, true)
+                vim.api.nvim_feedkeys(keys, 'n', false)
+            end
+        end
+
+        -- Set up keymapping for paste
+        vim.keymap.set({'n', 'v'}, 'p', smart_paste, {noremap = true, silent = true})
+
+        -- Custom notification function (to only show "Copy successful")
+        local original_notify = vim.notify
+        vim.notify = function(msg, level, opts)
+            if msg:match("Copied") then
+                original_notify("Copy successful", level, opts)
+            else
+                original_notify(msg, level, opts)
+            end
+        end
+
         -- Set OSC52 as the clipboard provider
         vim.g.clipboard = {
             name = "osc52",
