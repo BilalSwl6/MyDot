@@ -21,23 +21,6 @@ return {
             end
         })
 
-        -- Function to handle paste (overrides default p behavior)
-        local function smart_paste()
-            local osc52_paste = require('osc52').paste()
-            if osc52_paste and osc52_paste ~= "" then
-                -- Use OSC52 paste content if available
-                vim.api.nvim_put({osc52_paste}, 'c', true, true)
-                vim.notify("Pasted from OSC52 clipboard", vim.log.levels.INFO)
-            else
-                -- Fall back to regular paste if OSC52 clipboard is empty
-                local keys = vim.api.nvim_replace_termcodes('p', true, false, true)
-                vim.api.nvim_feedkeys(keys, 'n', false)
-            end
-        end
-
-        -- Set up keymapping for paste
-        vim.keymap.set({'n', 'v'}, 'p', smart_paste, {noremap = true, silent = true})
-
         -- Custom notification function (to only show "Copy successful")
         local original_notify = vim.notify
         vim.notify = function(msg, level, opts)
@@ -48,7 +31,47 @@ return {
             end
         end
 
-        -- Set OSC52 as the clipboard provider
+        -- Set up external clipboard commands (using xclip, pbpaste, etc. depending on system)
+        local paste_cmd
+        if vim.fn.has('mac') == 1 then
+            paste_cmd = 'pbpaste'
+        elseif vim.fn.has('wsl') == 1 then
+            paste_cmd = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))'
+        elseif vim.fn.executable('xclip') == 1 then
+            paste_cmd = 'xclip -selection clipboard -o'
+        elseif vim.fn.executable('wl-paste') == 1 then
+            paste_cmd = 'wl-paste'
+        end
+
+        -- Function for handling paste with external clipboard command
+        local function external_paste()
+            if paste_cmd then
+                local clipboard_content = vim.fn.system(paste_cmd)
+                if clipboard_content and #clipboard_content > 0 then
+                    -- Split by lines and remove possible trailing newline
+                    local lines = {}
+                    for line in string.gmatch(clipboard_content, "[^\r\n]+") do
+                        table.insert(lines, line)
+                    end
+                    vim.api.nvim_put(lines, 'c', true, true)
+                    vim.notify("Paste successful", vim.log.levels.INFO)
+                    return true
+                end
+            end
+            return false
+        end
+
+        -- Set up keymapping for paste
+        vim.keymap.set({'n', 'v'}, 'p', function()
+            -- Try external paste first
+            if not external_paste() then
+                -- Fall back to regular paste if external paste fails
+                local keys = vim.api.nvim_replace_termcodes('p', true, false, true)
+                vim.api.nvim_feedkeys(keys, 'n', false)
+            end
+        end, {noremap = true, silent = true})
+
+        -- Set OSC52 as the clipboard provider for copying only
         vim.g.clipboard = {
             name = "osc52",
             copy = {
@@ -56,8 +79,8 @@ return {
                 ["*"] = copy,  -- Copy to primary selection (Linux)
             },
             paste = {
-                ["+"] = function() return require('osc52').paste() end,
-                ["*"] = function() return require('osc52').paste() end,
+                ["+"] = function() return "" end,  -- Let our custom paste function handle this
+                ["*"] = function() return "" end,  -- Let our custom paste function handle this
             }
         }
     end
