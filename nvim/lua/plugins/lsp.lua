@@ -14,15 +14,15 @@ return {
 		config = function()
 			require('mason-lspconfig').setup({
 				ensure_installed = {
-					'pyright',       -- Python
-					'html',          -- HTML
-					'cssls',         -- CSS
-					'tailwindcss',   -- Tailwind
-					'eslint',        -- ESLint
-					'jsonls',        -- JSON
-					'volar',         -- Vue
-					'ts_ls',         -- TypeScript/JavaScript
-					'intelephense', 	-- PHP
+					'pyright', -- Python
+					'html', -- HTML
+					'cssls', -- CSS
+					'tailwindcss', -- Tailwind
+					'eslint', -- ESLint
+					'jsonls', -- JSON
+					'volar', -- Vue
+					'ts_ls', -- TypeScript/JavaScript
+					'intelephense', -- PHP
 				}
 			})
 		end
@@ -30,20 +30,20 @@ return {
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = {
-			'hrsh7th/cmp-nvim-lsp',           -- LSP completion source
-			'hrsh7th/cmp-buffer',             -- Buffer completion source
-			'hrsh7th/cmp-path',               -- Path completion source
-			'hrsh7th/cmp-cmdline',            -- Cmdline completion source
-			'L3MON4D3/LuaSnip',              -- Snippet engine
-			'saadparwaiz1/cmp_luasnip',       -- Snippet completion source
-			'rafamadriz/friendly-snippets',    -- Snippet collection
-			'zbirenbaum/copilot-cmp',         -- Copilot completion source
-			'mlaursen/vim-react-snippets',   -- React snippets
+			'hrsh7th/cmp-nvim-lsp', -- LSP completion source
+			'hrsh7th/cmp-buffer', -- Buffer completion source
+			'hrsh7th/cmp-path', -- Path completion source
+			'hrsh7th/cmp-cmdline', -- Cmdline completion source
+			'L3MON4D3/LuaSnip', -- Snippet engine
+			'saadparwaiz1/cmp_luasnip', -- Snippet completion source
+			'rafamadriz/friendly-snippets', -- Snippet collection
+			'zbirenbaum/copilot-cmp', -- Copilot completion source
+			'mlaursen/vim-react-snippets', -- React snippets
 		},
 		config = function()
 			local cmp = require('cmp')
 			local luasnip = require('luasnip')
-			require("vim-react-snippets").lazy_load()	-- Load React snippets
+			require("vim-react-snippets").lazy_load() -- Load React snippets
 
 			-- Load friendly-snippets
 			require('luasnip.loaders.from_vscode').lazy_load()
@@ -63,9 +63,9 @@ return {
 					['<C-f>'] = cmp.mapping.scroll_docs(4),
 					['<C-Space>'] = cmp.mapping.complete(),
 					['<C-e>'] = cmp.mapping.abort(),
-					['<CR>'] = cmp.mapping.confirm({ 
+					['<CR>'] = cmp.mapping.confirm({
 						select = true,
-						behavior = cmp.ConfirmBehavior.Replace  -- This helps with auto-import
+						behavior = cmp.ConfirmBehavior.Replace -- This helps with auto-import
 					}),
 					['<Tab>'] = cmp.mapping(function(fallback)
 						if cmp.visible() then
@@ -87,13 +87,13 @@ return {
 					end, { 'i', 's' }),
 				}),
 				sources = cmp.config.sources({
-					{ name = 'copilot', group_index = 2 },  -- Add Copilot source
+					{ name = 'copilot',  group_index = 2 }, -- Add Copilot source
 					{ name = 'nvim_lsp', group_index = 2 },
-					{ name = 'luasnip', group_index = 2 },
+					{ name = 'luasnip',  group_index = 2 },
 				}, {
-						{ name = 'buffer', group_index = 3 },
-						{ name = 'path', group_index = 3 },
-					}),
+					{ name = 'buffer', group_index = 3 },
+					{ name = 'path',   group_index = 3 },
+				}),
 				sorting = {
 					priority_weight = 2,
 					comparators = {
@@ -125,8 +125,8 @@ return {
 				sources = cmp.config.sources({
 					{ name = 'path' }
 				}, {
-						{ name = 'cmdline' }
-					})
+					{ name = 'cmdline' }
+				})
 			})
 		end
 	},
@@ -141,8 +141,10 @@ return {
 			local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 			-- Global LSP keybindings
-			vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-			vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+			vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float,
+				{ desc = 'Open floating diagnostic message' })
+			vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,
+				{ desc = 'Go to previous diagnostic message' })
 			vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 			vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
@@ -152,20 +154,31 @@ return {
 				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
 				callback = function(ev)
 					local opts = { buffer = ev.buf }
-					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf, desc = 'Go to declaration' })
-					vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf, desc = 'Go to definition' })
-					vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf, desc = 'Hover Documentation' })
-					vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = ev.buf, desc = 'Go to implementation' })
-					vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature Documentation' })
-					vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = ev.buf, desc = 'Add workspace folder' })
-					vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf, desc = 'Remove workspace folder' })
+					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,
+						{ buffer = ev.buf, desc = 'Go to declaration' })
+					vim.keymap.set('n', 'gd', vim.lsp.buf.definition,
+						{ buffer = ev.buf, desc = 'Go to definition' })
+					vim.keymap.set('n', 'K', vim.lsp.buf.hover,
+						{ buffer = ev.buf, desc = 'Hover Documentation' })
+					vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,
+						{ buffer = ev.buf, desc = 'Go to implementation' })
+					vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,
+						{ buffer = ev.buf, desc = 'Signature Documentation' })
+					vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder,
+						{ buffer = ev.buf, desc = 'Add workspace folder' })
+					vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder,
+						{ buffer = ev.buf, desc = 'Remove workspace folder' })
 					vim.keymap.set('n', '<leader>wl', function()
 						print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 					end, { buffer = ev.buf, desc = 'List workspace folders' })
-					vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { buffer = ev.buf, desc = 'Type Definition' })
-					vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = ev.buf, desc = 'Rename' })
-					vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code Action' })
-					vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = ev.buf, desc = 'Go to references' })
+					vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition,
+						{ buffer = ev.buf, desc = 'Type Definition' })
+					vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,
+						{ buffer = ev.buf, desc = 'Rename' })
+					vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action,
+						{ buffer = ev.buf, desc = 'Code Action' })
+					vim.keymap.set('n', 'gr', vim.lsp.buf.references,
+						{ buffer = ev.buf, desc = 'Go to references' })
 					vim.keymap.set('n', '<leader>f', function()
 						vim.lsp.buf.format { async = true }
 					end, { buffer = ev.buf, desc = 'Format file' })
@@ -235,7 +248,7 @@ return {
 							maxSize = 5000000,
 						},
 						completion = {
-							insertUseDeclaration = true,    -- Auto-import
+							insertUseDeclaration = true, -- Auto-import
 							fullyQualifyGlobalConstantsAndFunctions = true,
 							triggerParameterHints = true,
 							maxItems = 100,
@@ -279,11 +292,11 @@ return {
 		config = function()
 			require("copilot").setup({
 				suggestion = {
-					enabled = false,  -- Disable native suggestion as we use cmp
+					enabled = false, -- Disable native suggestion as we use cmp
 					auto_trigger = false,
 				},
 				panel = {
-					enabled = false,  -- Disable native panel as we use cmp
+					enabled = false, -- Disable native panel as we use cmp
 				},
 				filetypes = {
 					yaml = false,

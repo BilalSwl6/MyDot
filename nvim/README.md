@@ -2,7 +2,7 @@
 
 A modern, feature-rich Neovim configuration focused on productivity and ease of use.
 
-![Neovim Screenshot](https://raw.githubusercontent.com/1txb1l4l/MyDot/main/screenshot.png)
+![Neovim Screenshot](https://raw.githubusercontent.com/1TXB1L4L/MyDot/refs/heads/main/screenshots/nvim1.jpg)
 
 ## Installation
 
