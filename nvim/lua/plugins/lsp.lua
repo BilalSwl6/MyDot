@@ -22,6 +22,8 @@ return {
 					'jsonls',        -- JSON
 					'volar',         -- Vue
 					'ts_ls',         -- TypeScript/JavaScript
+					'intelephense', 	-- PHP
+					'lua-language-server',  -- Lua
 				}
 			})
 		end
