@@ -173,6 +173,12 @@ rm -rf ~/.config/nvim
 cp -rf nvim ~/.config/nvim
 ```
 
+## Plugins
+
+List of available Plugins
+
+- [zbirenbaum/copilot.lua](https://githu
+
 ## Troubleshooting
 
 If you encounter issues:
