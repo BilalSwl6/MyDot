@@ -42,3 +42,7 @@ end
 
 vim.keymap.set("n", "<leader>tt", ToggleVSCodeTheme, { desc = "Toggle VS Code Theme" })
 
+
+-- Database Support
+-- require("keymapping.database")
+
