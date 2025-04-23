@@ -66,6 +66,30 @@ This page provides a comprehensive list of keybindings available in MyDot Neovim
 | `<C-k>` | Signature documentation |
 | `gr` | Go to references |
 
+## Neovim Dadbod Keymappings
+
+| Keybinding     | Mode | Description                     |
+|----------------|------|---------------------------------|
+| `<leader>db`   | `n`  | Toggle DB UI sidebar            |
+| `<leader>df`   | `n`  | Focus DB UI sidebar             |
+| `<leader>da`   | `n`  | Add new DB connection           |
+| `<leader>dl`   | `n`  | Show last query info            |
+| `<leader>dr`   | `n`  | Rename DB buffer                |
+
+### SQL Filetype Keybindings
+
+| Keybinding     | Mode  | Description                           |
+|----------------|-------|---------------------------------------|
+| `<leader>de`   | `n`   | Execute SQL (under cursor)            |
+| `<leader>de`   | `v`   | Execute selected SQL                  |
+| `<leader>df`   | `n`   | Format SQL query                      |
+| `<leader>ds`   | `n`   | Save query to file                    |
+| `<leader>dt`   | `n`   | Show table schema                     |
+| `<leader>du`   | `n`   | Toggle SQL keyword uppercasing        |
+| `<leader>dx`   | `n`   | Explain query plan                    |
+
+> **Note:** These mappings are buffer-local and active only within `sql`, `mysql`, and `plsql` filetypes.
+
 ## Code Actions & Refactoring
 
 | Keybinding | Description |
