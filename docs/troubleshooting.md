@@ -145,7 +145,7 @@ Solution:
 
 2. Add the following to your configuration if needed:
    ```lua
-   -- In ~/.config/nvim/lua/core/options.lua
+   -- In ~/.config/nvim/lua/config/options.lua
    vim.opt.termguicolors = true
    ```
 
@@ -202,7 +202,7 @@ If you encounter persistent issues, you might want to reset your configuration:
 If you're still experiencing issues:
 
 1. **Check the Issue tracker on GitHub**
-   Browse existing issues at https://github.com/1txb1l4l/MyDot/issues to see if your problem has been reported.
+   Browse existing issues at https://github.com/ByteMorphic/MyDot/issues to see if your problem has been reported.
 
 2. **Open a new issue**
    If your problem hasn't been reported, open a new issue with:

@@ -10,22 +10,20 @@ The configuration is organized in a modular structure:
 ~/.config/nvim/
 ├── init.lua              # Main entry point
 ├── lua/
-│   ├── core/             # Core configuration
-│   │   ├── keymaps.lua   # Key mappings
-│   │   ├── options.lua   # Neovim options
+│   ├── config/             # Core configuration
+│   │   ├── keymappings.lua   # Key mappings
+│   │   ├── lazy.lua   # Neovim options
 │   │   └── ...
-│   ├── plugins/          # Plugin configurations
-│   │   ├── init.lua      # Plugin list
-│   │   ├── lsp.lua       # LSP setup
-│   │   ├── telescope.lua # Telescope setup
-│   │   └── ...
-│   └── utils/            # Utility functions
+│   └── plugins/          # Plugin configurations
+│       ├── lsp.lua       # LSP setup
+│       ├── telescope.lua # Telescope setup
+│       └── ...
 └── ...
 ```
 
 ## Customizing Options
 
-To change Neovim's built-in options, edit `~/.config/nvim/lua/core/options.lua`. This file contains settings like:
+To change Neovim's built-in options, edit `~/.config/nvim/lua/config/options.lua`. This file contains settings like:
 
 ```lua
 -- Example: Changing basic editor settings
@@ -37,7 +35,7 @@ vim.opt.shiftwidth = 2         -- Indentation width
 
 ## Customizing Keymappings
 
-To modify key mappings, edit `~/.config/nvim/lua/core/keymaps.lua`. The file is organized by functionality:
+To modify key mappings, edit `~/.config/nvim/lua/core/keymappings.lua`. The file is organized by functionality:
 
 ```lua
 -- Example: Adding a custom keymapping
@@ -48,7 +46,7 @@ vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
 
 MyDot uses the VSCode theme by default. To switch themes:
 
-1. First, add your preferred colorscheme plugin to `~/.config/nvim/lua/plugins/init.lua`:
+1. First, add your preferred colorscheme plugin to `~/.config/nvim/lua/plugins/<theme>.lua`:
 
 ```lua
 -- Example: Adding the Catppuccin theme
@@ -107,32 +105,32 @@ require("mason-lspconfig").setup {
 }
 ```
 
-## Adding Custom Snippets
-
-To add your own snippets:
-
-1. Create a snippets directory:
-
-```bash
-mkdir -p ~/.config/nvim/snippets
-```
-
-2. Create snippet files for specific languages (e.g., `~/.config/nvim/snippets/lua.json`)
-
-3. Load your snippets in the LuaSnip configuration:
-
-```lua
--- In your snippets configuration file
-require("luasnip.loaders.from_vscode").load({
-  paths = { "~/.config/nvim/snippets" }
-})
-```
+<!-- ## Adding Custom Snippets -->
+<!---->
+<!-- To add your own snippets: -->
+<!---->
+<!-- 1. Create a snippets directory: -->
+<!---->
+<!-- ```bash -->
+<!-- mkdir -p ~/.config/nvim/snippets -->
+<!-- ``` -->
+<!---->
+<!-- 2. Create snippet files for specific languages (e.g., `~/.config/nvim/snippets/lua.json`) -->
+<!---->
+<!-- 3. Load your snippets in the LuaSnip configuration: -->
+<!---->
+<!-- ```lua -->
+<!-- -- In your snippets configuration file -->
+<!-- require("luasnip.loaders.from_vscode").load({ -->
+<!--   paths = { "~/.config/nvim/snippets" } -->
+<!-- }) -->
+<!-- ``` -->
 
 ## Creating Custom Plugins
 
 For more complex customizations, you can create your own plugins:
 
-1. Create a new file in the plugins directory, e.g., `~/.config/nvim/lua/plugins/custom.lua`
+1. Create a new file in the plugins directory, e.g., `~/.config/nvim/lua/plugins/<custom>.lua`
 
 2. Define your plugin:
 

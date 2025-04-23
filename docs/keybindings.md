@@ -25,6 +25,8 @@ This page provides a comprehensive list of keybindings available in MyDot Neovim
 | `<leader>tn` | Next tab |
 | `<leader>tx` | Close current tab |
 | `<leader>to` | Open new tab |
+| `<leader>ts` | Split window |
+
 
 ## Fuzzy Finding (Telescope)
 
@@ -53,7 +55,7 @@ This page provides a comprehensive list of keybindings available in MyDot Neovim
 
 ## LSP Features
 
-| Keybinding | Description |a
+| Keybinding | Description |
 |------------|-------------|
 | `<leader>e` | Open floating diagnostic message |
 | `[d` | Go to previous diagnostic message |
