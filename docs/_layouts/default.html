@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    {% seo %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <style>
+      body {
+        font-family: 'Open Sans', sans-serif;
+        background: #fff;
+        color: #111;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background: #157878;
+        color: white;
+        padding: 1.5rem 1rem;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .navigation {
+        text-align: center;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #eff0f1;
+        padding-bottom: 1rem;
+      }
+
+      .navigation a {
+        margin: 0 1rem;
+        color: #1e6bb8;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .navigation a:hover {
+        text-decoration: underline;
+      }
+
+      .main-content {
+        max-width: 64rem;
+        padding: 2rem 6rem;
+        margin: 0 auto;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      @media screen and (max-width: 42em) {
+        .main-content {
+          padding: 2rem 1rem;
+        }
+
+        .navigation {
+          text-align: left;
+          line-height: 2;
+        }
+
+        .navigation a {
+          display: block;
+          margin: 0;
+        }
+      }
+
+      table {
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+      }
+
+      table th, table td {
+        padding: 0.5rem 1rem;
+        border: 1px solid #e9ebec;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem 1rem;
+        color: #666;
+        font-size: 0.9rem;
+        border-top: 1px solid #e9ebec;
+        margin-top: 4rem;
+      }
+    </style>
+    <title>{{ page.title | default: site.title }}</title>
+  </head>
+  <body>
+    <header>
+      <h1>{{ site.title | default: "MyDot Neovim Config" }}</h1>
+    </header>
+
+    <nav class="navigation">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/installation.html' | relative_url }}">Installation</a>
+      <a href="{{ '/keybindings.html' | relative_url }}">Keybindings</a>
+      <a href="{{ '/plugins.html' | relative_url }}">Plugins</a>
+      <a href="{{ '/customization.html' | relative_url }}">Customization</a>
+      <a href="{{ '/troubleshooting.html' | relative_url }}">Troubleshooting</a>
+    </nav>
+
+    <main class="main-content">
+      {{ content }}
+    </main>
+
+    <footer>
+      Maintained by <a href="https://github.com/ByteMorphic">ByteMorphic</a> • Hosted on GitHub Pages
+    </footer>
+  </body>
+</html>

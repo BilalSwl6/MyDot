@@ -1,0 +1,29 @@
+title: MyDot Neovim Configuration
+description: A modern, feature-rich Neovim configuration focused on productivity and ease of use.
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+- jekyll-remote-theme
+- jekyll-seo-tag
+
+# Navigation
+navigation:
+  - name: Home
+    link: /
+  - name: Installation
+    link: /installation.html
+  - name: Keybindings
+    link: /keybindings.html
+  - name: Plugins
+    link: /plugins.html
+  - name: Customization
+    link: /customization.html
+  - name: Troubleshooting
+    link: /troubleshooting.html
+
+# Theme customization
+show_downloads: false
+github:
+  repository_url: https://github.com/ByteMorphic/MyDot
+  owner_url: https://github.com/ByteMorphic
+  is_project_page: true
+  owner_name: ByteMorphic
