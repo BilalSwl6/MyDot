@@ -54,6 +54,12 @@ MyDot Neovim configuration comes with a carefully selected set of plugins to enh
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Git signs in the gutter
 - [sindrets/diffview.nvim](https://github.com/sindrets/diffview.nvim) - Git diff viewer
 
+### Database Support 
+- [kristijanhusak/vim-dadbod-ui](https://github.com/kristijanhusak/vim-dadbod-ui) - Simple UI for vim-dadbod
+- [tpope/vim-dadbod](https://github.com/tpope/vim-dadbod) - Modern database interface for vim/nvim
+- [tami5/sqlite.lua](https://github.com/kkharji/sqlite.lua) - For better support of sqlite
+- [jsborjesson/vim-uppercase-sql](https://github.com/jsborjesson/vim-uppercase-sql) - Automatically uppercase SQL keywords
+
 ## Utility Plugins
 
 - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Lua functions library
